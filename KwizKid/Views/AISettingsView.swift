@@ -1,9 +1,22 @@
 import SwiftUI
 
 struct AISettingsView: View {
-    @StateObject private var viewModel = AISettingsViewModel()
+    @EnvironmentObject var aiConfig: AIConfiguration
+    @State private var selectedProvider: AIProviderType
+    @State private var apiKey: String = ""
+    @State private var contentModerationLevel: ContentModerationLevel
+    @State private var testTopic: String = "Space"
+    @State private var testQuestionResult: String = "No test run yet."
+    @State private var isTestingConnection = false
+    @State private var isGeneratingTestQuestion = false
     @State private var showingTestResults = false
     @State private var testResults: String = ""
+    
+    // MARK: - Initializer
+    init() {
+        _selectedProvider = State(initialValue: .openAI)
+        _contentModerationLevel = State(initialValue: .strict)
+    }
     
     var body: some View {
         NavigationView {
@@ -23,36 +36,40 @@ struct AISettingsView: View {
                             
                             Spacer()
                             
-                            if viewModel.selectedProvider == provider {
+                            if selectedProvider == provider {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.blue)
                             }
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewModel.selectedProvider = provider
+                            selectedProvider = provider
+                            aiConfig.setProvider(provider)
                         }
                     }
                 }
                 
                 // API Configuration
-                if viewModel.selectedProvider != .mock {
+                if selectedProvider != .mock {
                     Section(header: Text("API Configuration")) {
-                        if viewModel.selectedProvider == .openAI {
-                            SecureField("OpenAI API Key", text: $viewModel.openAIKey)
+                        if selectedProvider == .openAI {
+                            SecureField("OpenAI API Key", text: $apiKey)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                        } else if viewModel.selectedProvider == .claude {
-                            SecureField("Claude API Key", text: $viewModel.claudeKey)
+                                .onChange(of: apiKey) { newKey in
+                                    aiConfig.saveAPIKey(newKey, for: selectedProvider)
+                                }
+                        } else if selectedProvider == .claude {
+                            SecureField("Claude API Key", text: $apiKey)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                        } else if viewModel.selectedProvider == .awsBedrock {
+                                .onChange(of: apiKey) { newKey in
+                                    aiConfig.saveAPIKey(newKey, for: selectedProvider)
+                                }
+                        } else if selectedProvider == .bedrock {
                             VStack(spacing: 12) {
-                                SecureField("AWS Access Key", text: $viewModel.awsAccessKey)
+                                SecureField("AWS Access Key", text: $apiKey)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                 
-                                SecureField("AWS Secret Key", text: $viewModel.awsSecretKey)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                
-                                TextField("AWS Region", text: $viewModel.awsRegion)
+                                TextField("AWS Region", text: $apiKey)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                             }
                         }
@@ -63,7 +80,7 @@ struct AISettingsView: View {
                 Section(header: Text("Test Connection")) {
                     Button(action: {
                         Task {
-                            let success = await viewModel.testConnection()
+                            let success = await testConnection()
                             testResults = success ? "✅ Connection successful!" : "❌ Connection failed. Please check your API keys."
                             showingTestResults = true
                         }
@@ -73,7 +90,17 @@ struct AISettingsView: View {
                             Text("Test Connection")
                         }
                     }
-                    .disabled(viewModel.selectedProvider == .mock)
+                    .disabled(selectedProvider == .mock || isTestingConnection)
+                    
+                    if isTestingConnection {
+                        HStack {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                            Text("Testing connection...")
+                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                .foregroundColor(.secondary)
+                        }
+                    }
                     
                     if showingTestResults {
                         Text(testResults)
@@ -86,11 +113,11 @@ struct AISettingsView: View {
                 Section(header: Text("Test Question Generation")) {
                     Button(action: {
                         Task {
-                            await viewModel.generateTestQuestions()
+                            await generateTestQuestions()
                         }
                     }) {
                         HStack {
-                            if viewModel.isGeneratingQuestions {
+                            if isGeneratingTestQuestion {
                                 ProgressView()
                                     .scaleEffect(0.8)
                             } else {
@@ -99,174 +126,87 @@ struct AISettingsView: View {
                             Text("Generate Test Questions")
                         }
                     }
-                    .disabled(viewModel.isGeneratingQuestions)
+                    .disabled(isGeneratingTestQuestion || selectedProvider == .mock)
                     
-                    if viewModel.questionsGenerated > 0 {
+                    TextField("Test Topic (e.g., 'Space')", text: $testTopic)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    if !testQuestionResult.isEmpty && testQuestionResult != "No test run yet." {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Last Generation Results:")
+                            Text("Test Results:")
                                 .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                .foregroundColor(.primary)
                             
-                            Text("Questions Generated: \(viewModel.questionsGenerated)")
+                            Text(testQuestionResult)
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                                 .foregroundColor(.secondary)
-                            
-                            Text("Generation Time: \(String(format: "%.2f", viewModel.lastGenerationTime))s")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
-                                .foregroundColor(.secondary)
+                                .padding(8)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8)
                         }
-                        .padding(.vertical, 8)
                     }
                 }
                 
-                // AI Features
-                Section(header: Text("AI Features")) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        FeatureRow(
-                            icon: "brain.head.profile",
-                            title: "Dynamic Question Generation",
-                            description: "AI creates unique questions for each quiz session"
-                        )
-                        
-                        FeatureRow(
-                            icon: "shield.checkered",
-                            title: "Child Safety Filtering",
-                            description: "Automatic content moderation for age-appropriate questions"
-                        )
-                        
-                        FeatureRow(
-                            icon: "person.2.fill",
-                            title: "Age-Appropriate Language",
-                            description: "Questions adapt to your child's age and reading level"
-                        )
-                        
-                        FeatureRow(
-                            icon: "chart.line.uptrend.xyaxis",
-                            title: "Difficulty Adjustment",
-                            description: "Questions automatically adjust based on performance"
-                        )
-                    }
-                }
-                
-                // Save Button
-                Section {
-                    Button(action: {
-                        viewModel.saveSettings()
-                    }) {
-                        HStack {
-                            Image(systemName: "checkmark.circle.fill")
-                            Text("Save Settings")
+                // Content Moderation
+                Section(header: Text("Content Moderation")) {
+                    Picker("Level", selection: $contentModerationLevel) {
+                        ForEach(ContentModerationLevel.allCases) { level in
+                            Text(level.rawValue).tag(level)
                         }
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(Color.blue)
-                        .cornerRadius(25)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .onChange(of: contentModerationLevel) { newLevel in
+                        aiConfig.setContentModerationLevel(newLevel)
+                    }
                 }
             }
             .navigationTitle("AI Settings")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .onAppear {
+            selectedProvider = aiConfig.currentProvider
+            contentModerationLevel = aiConfig.getContentModerationLevel()
+            apiKey = aiConfig.getAPIKey(for: selectedProvider) ?? ""
         }
     }
-}
-
-// MARK: - Feature Row
-struct FeatureRow: View {
-    let icon: String
-    let title: String
-    let description: String
     
-    var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: icon)
-                .font(.system(size: 20))
-                .foregroundColor(.blue)
-                .frame(width: 24, height: 24)
+    // MARK: - Private Methods
+    private func testConnection() async -> Bool {
+        isTestingConnection = true
+        defer { isTestingConnection = false }
+        
+        do {
+            let success = try await aiConfig.testConnection(for: selectedProvider)
+            return success
+        } catch {
+            print("Connection test failed: \(error)")
+            return false
+        }
+    }
+    
+    private func generateTestQuestions() async {
+        isGeneratingTestQuestion = true
+        defer { isGeneratingTestQuestion = false }
+        
+        do {
+            let questions = try await AIQuestionGenerator.shared.generateQuestions(
+                for: testTopic,
+                difficulty: .easy,
+                ageRange: AgeRange(min: 6, max: 8),
+                count: 1
+            )
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
-                    .foregroundColor(.primary)
-                
-                Text(description)
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.leading)
+            if let question = questions.first {
+                testQuestionResult = "Generated Question: \(question.text)\nOptions: \(question.options.joined(separator: ", "))\nCorrect: \(question.options[question.correctAnswer])"
+            } else {
+                testQuestionResult = "No question generated."
             }
-            
-            Spacer()
-        }
-        .padding(.vertical, 4)
-    }
-}
-
-// MARK: - AI Provider Info
-struct AIProviderInfoView: View {
-    let provider: AIProviderType
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Image(systemName: iconForProvider(provider))
-                    .font(.system(size: 24))
-                    .foregroundColor(.blue)
-                
-                Text(provider.displayName)
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
-                
-                Spacer()
-            }
-            
-            Text(provider.description)
-                .font(.system(size: 14, weight: .regular, design: .rounded))
-                .foregroundColor(.secondary)
-            
-            if provider != .mock {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Setup Instructions:")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                    
-                    Text(setupInstructions(for: provider))
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                        .foregroundColor(.secondary)
-                }
-                .padding(.top, 8)
-            }
-        }
-        .padding()
-        .background(Color.blue.opacity(0.1))
-        .cornerRadius(12)
-    }
-    
-    private func iconForProvider(_ provider: AIProviderType) -> String {
-        switch provider {
-        case .openAI:
-            return "brain.head.profile"
-        case .claude:
-            return "person.circle.fill"
-        case .awsBedrock:
-            return "cloud.fill"
-        case .mock:
-            return "gear"
-        }
-    }
-    
-    private func setupInstructions(for provider: AIProviderType) -> String {
-        switch provider {
-        case .openAI:
-            return "1. Get an API key from OpenAI\n2. Enter your API key above\n3. Test the connection"
-        case .claude:
-            return "1. Get an API key from Anthropic\n2. Enter your API key above\n3. Test the connection"
-        case .awsBedrock:
-            return "1. Set up AWS Bedrock access\n2. Enter your AWS credentials\n3. Test the connection"
-        case .mock:
-            return "Mock provider for development and testing"
+        } catch {
+            testQuestionResult = "Generation error: \(error.localizedDescription)"
         }
     }
 }
 
 #Preview {
     AISettingsView()
+        .environmentObject(AIConfiguration.shared)
 }
