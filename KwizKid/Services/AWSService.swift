@@ -60,13 +60,44 @@ class AWSService: ObservableObject {
 // MARK: - Quiz Content Service
 class QuizContentService: ObservableObject {
     static let shared = QuizContentService()
+    private let databaseService = AWSDatabaseService.shared
     private let aiGenerator = AIQuestionGenerator.shared
     
     private init() {}
     
-    // MARK: - AI-Generated Questions
+    // MARK: - Database-First Question Retrieval
     func generateQuestions(for category: QuizCategory, count: Int = 5) async throws -> [Question] {
-        // Use AI to generate questions based on category
+        print("🔍 Attempting to fetch questions from database...")
+        
+        // First, try to get questions from database
+        let query = QuestionQuery(
+            category: category.name,
+            difficulty: category.difficulty,
+            ageRange: category.ageRange,
+            count: count
+        )
+        
+        do {
+            let questions = try await databaseService.fetchQuestions(for: query)
+            
+            if !questions.isEmpty {
+                print("✅ Retrieved \(questions.count) questions from database")
+                return questions
+            } else {
+                print("⚠️ No questions found in database, falling back to AI generation")
+                return try await generateQuestionsWithAI(for: category, count: count)
+            }
+            
+        } catch {
+            print("❌ Database fetch failed: \(error), falling back to AI generation")
+            return try await generateQuestionsWithAI(for: category, count: count)
+        }
+    }
+    
+    // MARK: - AI Fallback Generation
+    private func generateQuestionsWithAI(for category: QuizCategory, count: Int) async throws -> [Question] {
+        print("🤖 Using AI to generate questions as fallback...")
+        
         let topic = getTopicForCategory(category)
         let questions = try await aiGenerator.generateQuestions(
             for: topic,
@@ -86,6 +117,24 @@ class QuizContentService: ObservableObject {
             adjustedQuestion.text = aiGenerator.adjustLanguageForAge(question.text, age: category.ageRange.min)
             adjustedQuestion.explanation = aiGenerator.adjustLanguageForAge(question.explanation, age: category.ageRange.min)
             return aiGenerator.adjustDifficulty(adjustedQuestion, for: category.difficulty)
+        }
+        
+        // Store generated questions in database for future use
+        Task {
+            do {
+                let storedQuestions = adjustedQuestions.map { question in
+                    StoredQuestion(
+                        question: question,
+                        category: category.name,
+                        difficulty: category.difficulty,
+                        ageRange: category.ageRange
+                    )
+                }
+                try await databaseService.storeQuestions(storedQuestions)
+                print("💾 Stored \(storedQuestions.count) AI-generated questions in database")
+            } catch {
+                print("⚠️ Failed to store AI-generated questions: \(error)")
+            }
         }
         
         return adjustedQuestions

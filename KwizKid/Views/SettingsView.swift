@@ -5,6 +5,7 @@ struct SettingsView: View {
     @State private var showParentalControls = false
     @State private var showNotifications = false
     @State private var showAbout = false
+    @State private var showDatabaseManagement = false
     
     var body: some View {
         NavigationView {
@@ -166,6 +167,24 @@ struct SettingsView: View {
                     }
                 }
                 
+                // Database Management
+                Section("Database Management") {
+                    Button(action: {
+                        showDatabaseManagement = true
+                    }) {
+                        HStack {
+                            Image(systemName: "server.rack")
+                                .foregroundColor(.blue)
+                                .frame(width: 24)
+                            Text("Question Database")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 12))
+                        }
+                    }
+                }
+                
                 // Account
                 Section("Account") {
                     Button(action: {
@@ -186,6 +205,9 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showParentalControls) {
             ParentalControlsView()
+        }
+        .sheet(isPresented: $showDatabaseManagement) {
+            DatabaseManagementView()
         }
         .sheet(isPresented: $showNotifications) {
             NotificationSettingsView()
