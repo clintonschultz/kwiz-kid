@@ -11,27 +11,31 @@
 		AA0000000000000000000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000004 /* ContentView.swift */; };
 		AA0000000000000000000005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000006 /* Assets.xcassets */; };
 		AA0000000000000000000007 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000008 /* Preview Assets.xcassets */; };
-		AA0000000000000000000009 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000010 /* AppState.swift */; };
-		AA0000000000000000000011 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000012 /* AppActions.swift */; };
-		AA0000000000000000000013 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000014 /* AppStore.swift */; };
-		AA0000000000000000000015 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000016 /* WelcomeView.swift */; };
-		AA0000000000000000000017 /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000018 /* CategorySelectionView.swift */; };
-		AA0000000000000000000019 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* QuizView.swift */; };
-		AA0000000000000000000021 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* ResultsView.swift */; };
-		AA0000000000000000000023 /* AWSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* AWSService.swift */; };
-		AA0000000000000000000025 /* RevenueCatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* RevenueCatService.swift */; };
-		AA0000000000000000000027 /* ChildSafetyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* ChildSafetyService.swift */; };
-		AA0000000000000000000029 /* KwizKidTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000030 /* KwizKidTheme.swift */; };
-		AA0000000000000000000031 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000032 /* MainTabView.swift */; };
-		AA0000000000000000000033 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* ProfileView.swift */; };
-		AA0000000000000000000035 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* SettingsView.swift */; };
-		AA0000000000000000000037 /* AIQuestionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000038 /* AIQuestionGenerator.swift */; };
-		AA0000000000000000000039 /* AIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* AIConfiguration.swift */; };
-		AA0000000000000000000041 /* AISettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000042 /* AISettingsView.swift */; };
-		AA0000000000000000000043 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000044 /* CustomProgressView.swift */; };
-		AA0000000000000000000045 /* AWSDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000046 /* AWSDatabaseService.swift */; };
-		AA0000000000000000000047 /* QuestionBatchGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000048 /* QuestionBatchGenerator.swift */; };
-		AA0000000000000000000049 /* DatabaseManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000050 /* DatabaseManagementView.swift */; };
+		AA0000000000000000000009 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000010 /* AppStore.swift */; };
+		AA0000000000000000000011 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000012 /* AppState.swift */; };
+		AA0000000000000000000013 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000014 /* AppActions.swift */; };
+		AA0000000000000000000015 /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000016 /* CategorySelectionView.swift */; };
+		AA0000000000000000000017 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000018 /* QuizView.swift */; };
+		AA0000000000000000000019 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* ResultsView.swift */; };
+		AA0000000000000000000021 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* MainTabView.swift */; };
+		AA0000000000000000000023 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* ProfileView.swift */; };
+		AA0000000000000000000025 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* SettingsView.swift */; };
+		AA0000000000000000000027 /* RevenueCatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* RevenueCatService.swift */; };
+		AA0000000000000000000029 /* ChildSafetyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000030 /* ChildSafetyService.swift */; };
+		AA0000000000000000000031 /* KwizKidTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000032 /* KwizKidTheme.swift */; };
+		AA0000000000000000000033 /* AIQuestionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* AIQuestionGenerator.swift */; };
+		AA0000000000000000000035 /* AIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* AIConfiguration.swift */; };
+		AA0000000000000000000037 /* AISettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000038 /* AISettingsView.swift */; };
+		AA0000000000000000000039 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* CustomProgressView.swift */; };
+		AA0000000000000000000041 /* QuestionBatchGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000042 /* QuestionBatchGenerator.swift */; };
+		AA0000000000000000000043 /* iCloudAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000044 /* iCloudAuthService.swift */; };
+		AA0000000000000000000045 /* QuizContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000046 /* QuizContentService.swift */; };
+		AA0000000000000000000047 /* QuestionDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000048 /* QuestionDatabase.swift */; };
+		AA0000000000000000000049 /* AdminToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000050 /* AdminToolView.swift */; };
+		AA0000000000000000000051 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000052 /* WelcomeView.swift */; };
+		AA0000000000000000000053 /* CloudQuestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000054 /* CloudQuestionService.swift */; };
+		AA0000000000000000000055 /* ParentalControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000056 /* ParentalControlsView.swift */; };
+		AA0000000000000000000057 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000058 /* NotificationSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,32 +43,36 @@
 		AA0000000000000000000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA0000000000000000000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0000000000000000000008 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AA0000000000000000000010 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		AA0000000000000000000012 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
-		AA0000000000000000000014 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
-		AA0000000000000000000016 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000018 /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000020 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000022 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000024 /* AWSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSService.swift; sourceTree = "<group>"; };
-		AA0000000000000000000026 /* RevenueCatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatService.swift; sourceTree = "<group>"; };
-		AA0000000000000000000028 /* ChildSafetyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSafetyService.swift; sourceTree = "<group>"; };
-		AA0000000000000000000030 /* KwizKidTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KwizKidTheme.swift; sourceTree = "<group>"; };
-		AA0000000000000000000032 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000034 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000036 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000038 /* AIQuestionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIQuestionGenerator.swift; sourceTree = "<group>"; };
-		AA0000000000000000000040 /* AIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConfiguration.swift; sourceTree = "<group>"; };
-		AA0000000000000000000042 /* AISettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISettingsView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000044 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000046 /* AWSDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSDatabaseService.swift; sourceTree = "<group>"; };
-		AA0000000000000000000048 /* QuestionBatchGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBatchGenerator.swift; sourceTree = "<group>"; };
-		AA0000000000000000000050 /* DatabaseManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagementView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000051 /* KwizKid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KwizKid.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000010 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		AA0000000000000000000012 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AA0000000000000000000014 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		AA0000000000000000000016 /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000018 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000020 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000022 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000024 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000026 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000028 /* RevenueCatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000030 /* ChildSafetyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSafetyService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000032 /* KwizKidTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KwizKidTheme.swift; sourceTree = "<group>"; };
+		AA0000000000000000000034 /* AIQuestionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIQuestionGenerator.swift; sourceTree = "<group>"; };
+		AA0000000000000000000036 /* AIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConfiguration.swift; sourceTree = "<group>"; };
+		AA0000000000000000000038 /* AISettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISettingsView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000040 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000042 /* QuestionBatchGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBatchGenerator.swift; sourceTree = "<group>"; };
+		AA0000000000000000000044 /* iCloudAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAuthService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000046 /* QuizContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000048 /* QuestionDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDatabase.swift; sourceTree = "<group>"; };
+		AA0000000000000000000050 /* AdminToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000052 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000054 /* CloudQuestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudQuestionService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000056 /* ParentalControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalControlsView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000058 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000059 /* KwizKid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KwizKid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AA0000000000000000000052 /* Frameworks */ = {
+		AA0000000000000000000060 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,96 +82,100 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA0000000000000000000053 = {
+		AA0000000000000000000061 = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000054 /* KwizKid */,
-				AA0000000000000000000051 /* KwizKid.app */,
+				AA0000000000000000000062 /* KwizKid */,
+				AA0000000000000000000063 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000054 /* KwizKid */ = {
+		AA0000000000000000000062 /* KwizKid */ = {
 			isa = PBXGroup;
 			children = (
 				AA0000000000000000000002 /* KwizKidApp.swift */,
 				AA0000000000000000000004 /* ContentView.swift */,
-				AA0000000000000000000055 /* Core */,
-				AA0000000000000000000056 /* Views */,
-				AA0000000000000000000057 /* Services */,
-				AA0000000000000000000058 /* Theme */,
+				AA0000000000000000000064 /* Core */,
+				AA0000000000000000000065 /* Views */,
+				AA0000000000000000000066 /* Services */,
+				AA0000000000000000000067 /* Theme */,
 				AA0000000000000000000006 /* Assets.xcassets */,
-				AA0000000000000000000059 /* Preview Content */,
+				AA0000000000000000000008 /* Preview Assets.xcassets */,
 			);
 			path = KwizKid;
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000055 /* Core */ = {
+		AA0000000000000000000063 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000010 /* AppState.swift */,
-				AA0000000000000000000012 /* AppActions.swift */,
-				AA0000000000000000000014 /* AppStore.swift */,
+				AA0000000000000000000059 /* KwizKid.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000064 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000010 /* AppStore.swift */,
+				AA0000000000000000000012 /* AppState.swift */,
+				AA0000000000000000000014 /* AppActions.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000056 /* Views */ = {
+		AA0000000000000000000065 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000016 /* WelcomeView.swift */,
-				AA0000000000000000000018 /* CategorySelectionView.swift */,
-				AA0000000000000000000020 /* QuizView.swift */,
-				AA0000000000000000000022 /* ResultsView.swift */,
-				AA0000000000000000000032 /* MainTabView.swift */,
-				AA0000000000000000000034 /* ProfileView.swift */,
-				AA0000000000000000000036 /* SettingsView.swift */,
-				AA0000000000000000000042 /* AISettingsView.swift */,
-				AA0000000000000000000044 /* CustomProgressView.swift */,
-				AA0000000000000000000050 /* DatabaseManagementView.swift */,
+				AA0000000000000000000016 /* CategorySelectionView.swift */,
+				AA0000000000000000000018 /* QuizView.swift */,
+				AA0000000000000000000020 /* ResultsView.swift */,
+				AA0000000000000000000022 /* MainTabView.swift */,
+				AA0000000000000000000024 /* ProfileView.swift */,
+				AA0000000000000000000026 /* SettingsView.swift */,
+				AA0000000000000000000038 /* AISettingsView.swift */,
+				AA0000000000000000000040 /* CustomProgressView.swift */,
+				AA0000000000000000000050 /* AdminToolView.swift */,
+				AA0000000000000000000052 /* WelcomeView.swift */,
+				AA0000000000000000000056 /* ParentalControlsView.swift */,
+				AA0000000000000000000058 /* NotificationSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000057 /* Services */ = {
+		AA0000000000000000000066 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000024 /* AWSService.swift */,
-				AA0000000000000000000026 /* RevenueCatService.swift */,
-				AA0000000000000000000028 /* ChildSafetyService.swift */,
-				AA0000000000000000000038 /* AIQuestionGenerator.swift */,
-				AA0000000000000000000040 /* AIConfiguration.swift */,
-				AA0000000000000000000046 /* AWSDatabaseService.swift */,
-				AA0000000000000000000048 /* QuestionBatchGenerator.swift */,
+				AA0000000000000000000028 /* RevenueCatService.swift */,
+				AA0000000000000000000030 /* ChildSafetyService.swift */,
+				AA0000000000000000000034 /* AIQuestionGenerator.swift */,
+				AA0000000000000000000036 /* AIConfiguration.swift */,
+				AA0000000000000000000042 /* QuestionBatchGenerator.swift */,
+				AA0000000000000000000044 /* iCloudAuthService.swift */,
+				AA0000000000000000000046 /* QuizContentService.swift */,
+				AA0000000000000000000048 /* QuestionDatabase.swift */,
+				AA0000000000000000000054 /* CloudQuestionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000058 /* Theme */ = {
+		AA0000000000000000000067 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000030 /* KwizKidTheme.swift */,
+				AA0000000000000000000032 /* KwizKidTheme.swift */,
 			);
 			path = Theme;
-			sourceTree = "<group>";
-		};
-		AA0000000000000000000059 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				AA0000000000000000000008 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA0000000000000000000060 /* KwizKid */ = {
+		AA0000000000000000000068 /* KwizKid */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA0000000000000000000061 /* Build configuration list for PBXNativeTarget "KwizKid" */;
+			buildConfigurationList = AA0000000000000000000069 /* Build configuration list for PBXNativeTarget "KwizKid" */;
 			buildPhases = (
-				AA0000000000000000000062 /* Sources */,
-				AA0000000000000000000052 /* Frameworks */,
-				AA0000000000000000000063 /* Resources */,
+				AA0000000000000000000070 /* Sources */,
+				AA0000000000000000000060 /* Frameworks */,
+				AA0000000000000000000071 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -171,25 +183,25 @@
 			);
 			name = KwizKid;
 			productName = KwizKid;
-			productReference = AA0000000000000000000051 /* KwizKid.app */;
+			productReference = AA0000000000000000000059 /* KwizKid.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		AA0000000000000000000064 /* Project object */ = {
+		AA0000000000000000000072 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					AA0000000000000000000060 = {
+					AA0000000000000000000068 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = AA0000000000000000000065 /* Build configuration list for PBXProject "KwizKid" */;
+			buildConfigurationList = AA0000000000000000000073 /* Build configuration list for PBXProject "KwizKid" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -197,18 +209,18 @@
 				en,
 				Base,
 			);
-			mainGroup = AA0000000000000000000053;
-			productRefGroup = AA0000000000000000000053;
+			mainGroup = AA0000000000000000000061;
+			productRefGroup = AA0000000000000000000063 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA0000000000000000000060 /* KwizKid */,
+				AA0000000000000000000068 /* KwizKid */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AA0000000000000000000063 /* Resources */ = {
+		AA0000000000000000000071 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,40 +232,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AA0000000000000000000062 /* Sources */ = {
+		AA0000000000000000000070 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AA0000000000000000000001 /* KwizKidApp.swift in Sources */,
 				AA0000000000000000000003 /* ContentView.swift in Sources */,
-				AA0000000000000000000009 /* AppState.swift in Sources */,
-				AA0000000000000000000011 /* AppActions.swift in Sources */,
-				AA0000000000000000000013 /* AppStore.swift in Sources */,
-				AA0000000000000000000015 /* WelcomeView.swift in Sources */,
-				AA0000000000000000000017 /* CategorySelectionView.swift in Sources */,
-				AA0000000000000000000019 /* QuizView.swift in Sources */,
-				AA0000000000000000000021 /* ResultsView.swift in Sources */,
-				AA0000000000000000000023 /* AWSService.swift in Sources */,
-				AA0000000000000000000025 /* RevenueCatService.swift in Sources */,
-				AA0000000000000000000027 /* ChildSafetyService.swift in Sources */,
-				AA0000000000000000000029 /* KwizKidTheme.swift in Sources */,
-				AA0000000000000000000031 /* MainTabView.swift in Sources */,
-				AA0000000000000000000033 /* ProfileView.swift in Sources */,
-				AA0000000000000000000035 /* SettingsView.swift in Sources */,
-				AA0000000000000000000037 /* AIQuestionGenerator.swift in Sources */,
-				AA0000000000000000000039 /* AIConfiguration.swift in Sources */,
-				AA0000000000000000000041 /* AISettingsView.swift in Sources */,
-				AA0000000000000000000043 /* CustomProgressView.swift in Sources */,
-				AA0000000000000000000045 /* AWSDatabaseService.swift in Sources */,
-				AA0000000000000000000047 /* QuestionBatchGenerator.swift in Sources */,
-				AA0000000000000000000049 /* DatabaseManagementView.swift in Sources */,
+				AA0000000000000000000009 /* AppStore.swift in Sources */,
+				AA0000000000000000000011 /* AppState.swift in Sources */,
+				AA0000000000000000000013 /* AppActions.swift in Sources */,
+				AA0000000000000000000015 /* CategorySelectionView.swift in Sources */,
+				AA0000000000000000000017 /* QuizView.swift in Sources */,
+				AA0000000000000000000019 /* ResultsView.swift in Sources */,
+				AA0000000000000000000021 /* MainTabView.swift in Sources */,
+				AA0000000000000000000023 /* ProfileView.swift in Sources */,
+				AA0000000000000000000025 /* SettingsView.swift in Sources */,
+				AA0000000000000000000027 /* RevenueCatService.swift in Sources */,
+				AA0000000000000000000029 /* ChildSafetyService.swift in Sources */,
+				AA0000000000000000000031 /* KwizKidTheme.swift in Sources */,
+				AA0000000000000000000033 /* AIQuestionGenerator.swift in Sources */,
+				AA0000000000000000000035 /* AIConfiguration.swift in Sources */,
+				AA0000000000000000000037 /* AISettingsView.swift in Sources */,
+				AA0000000000000000000039 /* CustomProgressView.swift in Sources */,
+				AA0000000000000000000041 /* QuestionBatchGenerator.swift in Sources */,
+				AA0000000000000000000043 /* iCloudAuthService.swift in Sources */,
+				AA0000000000000000000045 /* QuizContentService.swift in Sources */,
+				AA0000000000000000000047 /* QuestionDatabase.swift in Sources */,
+				AA0000000000000000000049 /* AdminToolView.swift in Sources */,
+				AA0000000000000000000051 /* WelcomeView.swift in Sources */,
+				AA0000000000000000000053 /* CloudQuestionService.swift in Sources */,
+				AA0000000000000000000055 /* ParentalControlsView.swift in Sources */,
+				AA0000000000000000000057 /* NotificationSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		AA0000000000000000000066 /* Debug */ = {
+		AA0000000000000000000074 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -316,7 +332,7 @@
 			};
 			name = Debug;
 		};
-		AA0000000000000000000067 /* Release */ = {
+		AA0000000000000000000075 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -372,10 +388,10 @@
 			};
 			name = Release;
 		};
-		AA0000000000000000000068 /* Debug */ = {
+		AA0000000000000000000076 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -400,10 +416,10 @@
 			};
 			name = Debug;
 		};
-		AA0000000000000000000069 /* Release */ = {
+		AA0000000000000000000077 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -431,25 +447,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA0000000000000000000061 /* Build configuration list for PBXNativeTarget "KwizKid" */ = {
+		AA0000000000000000000069 /* Build configuration list for PBXNativeTarget "KwizKid" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA0000000000000000000068 /* Debug */,
-				AA0000000000000000000069 /* Release */,
+				AA0000000000000000000076 /* Debug */,
+				AA0000000000000000000077 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA0000000000000000000065 /* Build configuration list for PBXProject "KwizKid" */ = {
+		AA0000000000000000000073 /* Build configuration list for PBXProject "KwizKid" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA0000000000000000000066 /* Debug */,
-				AA0000000000000000000067 /* Release */,
+				AA0000000000000000000074 /* Debug */,
+				AA0000000000000000000075 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = AA0000000000000000000064 /* Project object */;
+	rootObject = AA0000000000000000000072 /* Project object */;
 }

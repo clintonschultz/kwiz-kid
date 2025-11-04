@@ -40,7 +40,7 @@ class QuestionBatchGenerator: ObservableObject {
     @Published var generationError: String?
     
     private let aiGenerator = AIQuestionGenerator.shared
-    private let databaseService = AWSDatabaseService.shared
+    private let database = QuestionDatabase.shared
     
     private init() {}
     
@@ -58,7 +58,7 @@ class QuestionBatchGenerator: ObservableObject {
         }
         
         do {
-            var allQuestions: [StoredQuestion] = []
+                        var allQuestions: [QuestionRecord] = []
             var completedTasks = 0
             
             // Generate questions for each combination
@@ -85,20 +85,34 @@ class QuestionBatchGenerator: ObservableObject {
                                 count: config.questionsPerCategory
                             )
                             
-                            // Convert to StoredQuestion format
-                            let storedQuestions = questions.map { question in
-                                StoredQuestion(
-                                    question: question,
+                            // Convert to QuestionRecord format
+                            let questionRecords = questions.map { question in
+                                QuestionRecord(
+                                    id: question.id,
                                     category: category,
-                                    difficulty: difficulty,
-                                    ageRange: ageRange
+                                    difficulty: difficulty.rawValue,
+                                    ageMin: ageRange.min,
+                                    ageMax: ageRange.max,
+                                    questionText: question.text,
+                                    options: question.options,
+                                    correctAnswer: question.correctAnswer,
+                                    explanation: question.explanation,
+                                    hasImage: false,
+                                    imagePath: nil,
+                                    imagePrompt: nil,
+                                    tags: generateTags(for: category),
+                                    createdAt: Date(),
+                                    isActive: true,
+                                    usageCount: 0
                                 )
                             }
                             
-                            allQuestions.append(contentsOf: storedQuestions)
+                            allQuestions.append(contentsOf: questionRecords)
                             
                             // Store in database
-                            try await databaseService.storeQuestions(storedQuestions)
+                            for record in questionRecords {
+                                database.insertQuestion(record)
+                            }
                             
                             completedTasks += 1
                             
@@ -112,8 +126,8 @@ class QuestionBatchGenerator: ObservableObject {
                 }
             }
             
-            // Final batch storage
-            try await databaseService.batchStoreQuestions(allQuestions)
+            // Final batch storage (already stored individually above)
+            print("✅ All questions stored in database")
             
             await MainActor.run {
                 self.progress = GenerationProgress(
@@ -261,8 +275,33 @@ class QuestionBatchGenerator: ObservableObject {
     
     func getDatabaseStats() async throws -> (totalQuestions: Int, categories: [String: Int]) {
         print("📊 Getting database statistics...")
+        let totalQuestions = database.totalQuestions
+        var categories: [String: Int] = [:]
         
-        // TODO: Implement actual database stats
-        return (totalQuestions: 0, categories: [:])
+        for category in database.categories {
+            categories[category.id] = database.getQuestionCount(by: category.id)
+        }
+        
+        return (totalQuestions: totalQuestions, categories: categories)
+    }
+    
+    // MARK: - Helper Methods
+    private func generateTags(for category: String) -> [String] {
+        switch category.lowercased() {
+        case "math":
+            return ["numbers", "arithmetic", "problem-solving"]
+        case "science":
+            return ["nature", "experiments", "discovery"]
+        case "reading":
+            return ["language", "comprehension", "literature"]
+        case "history":
+            return ["past", "events", "historical"]
+        case "geography":
+            return ["world", "countries", "places"]
+        case "art":
+            return ["creativity", "colors", "artistic"]
+        default:
+            return ["general", "education"]
+        }
     }
 }

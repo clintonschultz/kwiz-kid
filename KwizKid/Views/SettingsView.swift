@@ -5,7 +5,7 @@ struct SettingsView: View {
     @State private var showParentalControls = false
     @State private var showNotifications = false
     @State private var showAbout = false
-    @State private var showDatabaseManagement = false
+    @State private var showAdminTool = false
     
     var body: some View {
         NavigationView {
@@ -167,23 +167,25 @@ struct SettingsView: View {
                     }
                 }
                 
-                // Database Management
-                Section("Database Management") {
-                    Button(action: {
-                        showDatabaseManagement = true
-                    }) {
-                        HStack {
-                            Image(systemName: "server.rack")
-                                .foregroundColor(.blue)
-                                .frame(width: 24)
-                            Text("Question Database")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 12))
+                    // Admin Tools - Only in development builds
+                    #if DEBUG
+                    Section("Admin Tools") {
+                        Button(action: {
+                            showAdminTool = true
+                        }) {
+                            HStack {
+                                Image(systemName: "wrench.and.screwdriver.fill")
+                                    .foregroundColor(.blue)
+                                    .frame(width: 24)
+                                Text("Question Database")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 12))
+                            }
                         }
                     }
-                }
+                    #endif
                 
                 // Account
                 Section("Account") {
@@ -206,9 +208,11 @@ struct SettingsView: View {
         .sheet(isPresented: $showParentalControls) {
             ParentalControlsView()
         }
-        .sheet(isPresented: $showDatabaseManagement) {
-            DatabaseManagementView()
-        }
+            #if DEBUG
+            .sheet(isPresented: $showAdminTool) {
+                AdminToolView()
+            }
+            #endif
         .sheet(isPresented: $showNotifications) {
             NotificationSettingsView()
         }

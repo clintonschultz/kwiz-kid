@@ -64,12 +64,12 @@ struct AISettingsView: View {
                                 .onChange(of: apiKey) { newKey in
                                     aiConfig.saveAPIKey(newKey, for: selectedProvider)
                                 }
-                        } else if selectedProvider == .bedrock {
+                        } else if selectedProvider == .claude {
                             VStack(spacing: 12) {
-                                SecureField("AWS Access Key", text: $apiKey)
+                                SecureField("OpenAI API Key", text: $apiKey)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                 
-                                TextField("AWS Region", text: $apiKey)
+                                TextField("OpenAI Organization", text: $apiKey)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                             }
                         }

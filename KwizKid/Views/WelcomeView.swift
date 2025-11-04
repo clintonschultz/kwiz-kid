@@ -43,58 +43,37 @@ struct WelcomeView: View {
                 
                 Spacer()
                 
-                // Action Buttons
-                VStack(spacing: 16) {
-                    Button(action: {
-                        store.dispatch(.navigateTo(.categorySelection))
-                    }) {
-                        HStack {
-                            Image(systemName: "play.circle.fill")
-                            Text("Start Learning")
-                        }
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 56)
-                        .background(
-                            LinearGradient(
-                                colors: [.blue, .purple],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
+                // Action Button
+                Button(action: {
+                    store.dispatch(.navigateTo(.categorySelection))
+                }) {
+                    HStack {
+                        Image(systemName: "play.circle.fill")
+                        Text("Start Learning")
+                    }
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 56)
+                    .background(
+                        LinearGradient(
+                            colors: [.blue, .purple],
+                            startPoint: .leading,
+                            endPoint: .trailing
                         )
-                        .cornerRadius(28)
-                        .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
-                    }
-                    .scaleEffect(showButtons ? 1.0 : 0.8)
-                    .opacity(showButtons ? 1.0 : 0.0)
-                    .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(1.2), value: showButtons)
-                    
-                    Button(action: {
-                        // Handle settings/preferences
-                    }) {
-                        HStack {
-                            Image(systemName: "gearshape.fill")
-                            Text("Settings")
-                        }
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(.blue)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 48)
-                        .background(Color.blue.opacity(0.1))
-                        .cornerRadius(24)
-                    }
-                    .scaleEffect(showButtons ? 1.0 : 0.8)
-                    .opacity(showButtons ? 1.0 : 0.0)
-                    .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(1.4), value: showButtons)
+                    )
+                    .cornerRadius(28)
+                    .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
                 }
+                .opacity(showButtons ? 1.0 : 0.0)
+                .animation(.easeInOut(duration: 0.8).delay(1.0), value: showButtons)
                 .padding(.horizontal, 32)
                 
                 Spacer()
             }
         }
         .onAppear {
-            // Start the animation sequence
+            // Start the animation sequence with smooth opacity transitions
             withAnimation(.easeInOut(duration: 0.8)) {
                 showBrainIcon = true
             }
@@ -107,7 +86,7 @@ struct WelcomeView: View {
                 showSubtitle = true
             }
             
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.7).delay(1.2)) {
+            withAnimation(.easeInOut(duration: 0.8).delay(1.0)) {
                 showButtons = true
             }
         }

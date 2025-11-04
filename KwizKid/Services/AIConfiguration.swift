@@ -51,7 +51,6 @@ class AIConfiguration: ObservableObject {
 enum AIProviderType: String, CaseIterable, Identifiable {
     case openAI = "OpenAI GPT"
     case claude = "Anthropic Claude"
-    case bedrock = "AWS Bedrock"
     case mock = "Mock Provider (Development)"
     
     var id: String { self.rawValue }
@@ -66,8 +65,6 @@ enum AIProviderType: String, CaseIterable, Identifiable {
             return "OpenAI's GPT models for question generation"
         case .claude:
             return "Anthropic's Claude for advanced reasoning"
-        case .bedrock:
-            return "AWS Bedrock for enterprise AI"
         case .mock:
             return "Mock provider for development and testing"
         }

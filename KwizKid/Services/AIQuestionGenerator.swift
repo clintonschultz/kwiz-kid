@@ -8,8 +8,16 @@ class AIQuestionGenerator: ObservableObject {
     private let baseURL = "https://api.openai.com/v1/chat/completions"
     
     private init() {
-        // Get API key from environment variable
-        self.apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] ?? ""
+        // Get API key from environment variable or use hardcoded for development
+        let envKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] ?? ""
+        if !envKey.isEmpty {
+            self.apiKey = envKey
+            print("🔧 Using environment API key")
+        } else {
+            // No API key found. Configure via environment or secure storage.
+            self.apiKey = ""
+            print("❗️ No OPENAI_API_KEY found in environment. Configure your API key.")
+        }
         
         print("🔧 AIQuestionGenerator initialized with API key: \(self.apiKey.isEmpty ? "EMPTY" : "FOUND")")
     }
@@ -61,6 +69,14 @@ class AIQuestionGenerator: ObservableObject {
         } catch {
             // Fallback to mock questions if API fails
             print("OpenAI API failed, using mock questions: \(error)")
+            
+            // Check if it's a quota error and provide helpful message
+            if let apiError = error as? AIError, case .apiError(let errorMessage) = apiError {
+                if errorMessage.contains("insufficient_quota") {
+                    print("⚠️ OpenAI quota exceeded. Using mock questions instead.")
+                }
+            }
+            
             return try await generateMockQuestions(for: topic, difficulty: difficulty, ageRange: ageRange, count: count)
         }
     }
@@ -142,8 +158,34 @@ class AIQuestionGenerator: ObservableObject {
         ageRange: AgeRange,
         count: Int
     ) -> String {
-        // Simple hardcoded prompt for testing
-        return "Create 5 quiz questions about \(topic) for kids. Format: Q: [question] A: [option1] A: [option2] A: [option3] A: [option4] Correct: [correct] Explanation: [explanation]"
+        let difficultyText = difficulty.rawValue.capitalized
+        let ageText = "ages \(ageRange.min)-\(ageRange.max)"
+        
+        return """
+        Create exactly \(count) educational quiz questions about \(topic) for children \(ageText) at \(difficultyText) level.
+        
+        IMPORTANT: Return ONLY the questions in this exact format. Do not include any other text, explanations, or formatting.
+        
+        Format each question exactly like this:
+        
+        Q: What is the capital of France?
+        A: London
+        A: Berlin  
+        A: Paris
+        A: Madrid
+        Correct: 3
+        Explanation: Paris is the capital city of France.
+        
+        Q: What color do you get when you mix red and blue?
+        A: Green
+        A: Purple
+        A: Orange
+        A: Yellow
+        Correct: 2
+        Explanation: When you mix red and blue paint, you get purple.
+        
+        Continue this format for all \(count) questions. Make sure each question is appropriate for \(ageText) children and \(difficultyText) difficulty level.
+        """
     }
     
     private func simplifiedLanguage(_ text: String) -> String {
@@ -213,7 +255,7 @@ class AIQuestionGenerator: ObservableObject {
         print("🤖 AI Response Length: \(content.count) characters")
         
         // Check if the AI is just returning the prompt
-        if content.contains("Create \(count) multiple choice questions") {
+        if content.contains("Create exactly \(count) educational quiz questions") {
             print("⚠️ AI is returning the prompt instead of generating questions!")
             throw AIError.parsingError
         }
@@ -258,7 +300,12 @@ class AIQuestionGenerator: ObservableObject {
                 
             } else if trimmedLine.hasPrefix("Correct:") {
                 let correctText = trimmedLine.replacingOccurrences(of: "Correct:", with: "").trimmingCharacters(in: .whitespaces)
-                currentCorrectAnswer = currentOptions.firstIndex(of: correctText) ?? 0
+                // Handle both number format (Correct: 3) and text format (Correct: Paris)
+                if let correctNumber = Int(correctText) {
+                    currentCorrectAnswer = correctNumber - 1 // Convert to 0-based index
+                } else {
+                    currentCorrectAnswer = currentOptions.firstIndex(of: correctText) ?? 0
+                }
                 
             } else if trimmedLine.hasPrefix("Explanation:") {
                 currentExplanation = trimmedLine.replacingOccurrences(of: "Explanation:", with: "").trimmingCharacters(in: .whitespaces)
@@ -299,24 +346,51 @@ class AIQuestionGenerator: ObservableObject {
         // Fallback mock implementation
         var questions: [Question] = []
         
+        let mockQuestions = getMockQuestionsForTopic(topic, difficulty: difficulty, ageRange: ageRange)
+        
         for i in 0..<count {
-            let questionText = "What is a \(topic) related question number \(i + 1) for a \(ageRange.min)-\(ageRange.max) year old at \(difficulty) difficulty?"
-            let options = ["Option A", "Option B", "Option C", "Option D"]
-            let correctAnswer = Int.random(in: 0..<4)
-            let explanation = "This is the explanation for question \(i + 1) about \(topic)."
+            let mockIndex = i % mockQuestions.count
+            let mockQuestion = mockQuestions[mockIndex]
             
             let question = Question(
-                id: UUID().uuidString,
-                text: questionText,
-                options: options,
-                correctAnswer: correctAnswer,
-                explanation: explanation,
+                id: "mock_\(topic)_\(difficulty.rawValue)_\(ageRange.min)_\(ageRange.max)_\(i)_\(Date().timeIntervalSince1970)_\(UUID().uuidString.prefix(8))",
+                text: mockQuestion.text,
+                options: mockQuestion.options,
+                correctAnswer: mockQuestion.correctAnswer,
+                explanation: mockQuestion.explanation,
                 difficulty: difficulty
             )
             questions.append(question)
         }
         
         return questions
+    }
+    
+    private func getMockQuestionsForTopic(_ topic: String, difficulty: Difficulty, ageRange: AgeRange) -> [Question] {
+        let uniqueId = UUID().uuidString.prefix(8)
+        switch topic.lowercased() {
+        case "math":
+            return [
+                Question(id: "mock_math_1_\(uniqueId)", text: "What is 5 + 3?", options: ["6", "7", "8", "9"], correctAnswer: 2, explanation: "5 + 3 equals 8.", difficulty: .easy),
+                Question(id: "mock_math_2_\(uniqueId)", text: "What is 10 - 4?", options: ["5", "6", "7", "8"], correctAnswer: 1, explanation: "10 - 4 equals 6.", difficulty: .easy),
+                Question(id: "mock_math_3_\(uniqueId)", text: "What is 2 × 3?", options: ["4", "5", "6", "7"], correctAnswer: 2, explanation: "2 × 3 equals 6.", difficulty: .easy)
+            ]
+        case "science":
+            return [
+                Question(id: "mock_science_1_\(uniqueId)", text: "What do plants need to grow?", options: ["Water only", "Sunlight only", "Water and sunlight", "Nothing"], correctAnswer: 2, explanation: "Plants need both water and sunlight to grow.", difficulty: .easy),
+                Question(id: "mock_science_2_\(uniqueId)", text: "What is the largest planet in our solar system?", options: ["Earth", "Mars", "Jupiter", "Saturn"], correctAnswer: 2, explanation: "Jupiter is the largest planet in our solar system.", difficulty: .medium)
+            ]
+        case "reading":
+            return [
+                Question(id: "mock_reading_1_\(uniqueId)", text: "What is the opposite of 'happy'?", options: ["Sad", "Angry", "Excited", "Tired"], correctAnswer: 0, explanation: "The opposite of 'happy' is 'sad'.", difficulty: .easy),
+                Question(id: "mock_reading_2_\(uniqueId)", text: "What do we call a person who writes books?", options: ["Artist", "Author", "Actor", "Singer"], correctAnswer: 1, explanation: "A person who writes books is called an author.", difficulty: .easy)
+            ]
+        default:
+            return [
+                Question(id: "mock_general_1_\(uniqueId)", text: "What is the capital of France?", options: ["London", "Berlin", "Paris", "Madrid"], correctAnswer: 2, explanation: "Paris is the capital of France.", difficulty: .easy),
+                Question(id: "mock_general_2_\(uniqueId)", text: "What color do you get when you mix red and blue?", options: ["Green", "Purple", "Orange", "Yellow"], correctAnswer: 1, explanation: "When you mix red and blue, you get purple.", difficulty: .easy)
+            ]
+        }
     }
 }
 

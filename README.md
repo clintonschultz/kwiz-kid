@@ -8,7 +8,7 @@
 - **Child-Safe Content**: Advanced content filtering ensures all questions are appropriate for children
 - **Multiple Categories**: Math, Science, Reading, History, Geography, and Art
 - **Unidirectional State Flow**: Clean, maintainable architecture using SwiftUI
-- **AWS Integration**: Secure authentication and backend services
+- **iCloud Integration**: Secure authentication and data sync
 - **RevenueCat Integration**: Subscription management for premium features
 - **Parental Controls**: Time limits, progress tracking, and content filtering
 - **Beautiful UI**: Fun, engaging design that appeals to children while maintaining educational value
@@ -28,7 +28,7 @@ KwizKid uses a unidirectional state flow pattern where:
 - `Middleware`: Handles side effects and external services
 
 ### Services
-- `AWSService`: Authentication and backend integration
+- `iCloudAuthService`: iCloud authentication and user data sync
 - `RevenueCatService`: Subscription management
 - `ChildSafetyService`: Content filtering and safety features
 - `QuizContentService`: AI-generated question creation
@@ -38,7 +38,7 @@ KwizKid uses a unidirectional state flow pattern where:
 ### Prerequisites
 - Xcode 15.0 or later
 - iOS 17.0 or later
-- AWS Account
+- Firebase Account
 - RevenueCat Account
 
 ### 1. Clone the Repository
@@ -52,10 +52,10 @@ cd kwiz-kid
 swift package resolve
 ```
 
-### 3. Configure AWS
-1. Create an AWS account and set up Cognito
-2. Update `AWSService.swift` with your AWS configuration
-3. Set up AWS Bedrock for AI question generation
+### 3. Configure iCloud & Firebase
+1. Enable iCloud capabilities in Xcode
+2. Set up Firebase project and add `GoogleService-Info.plist`
+3. Configure OpenAI API key for question generation
 
 ### 4. Configure RevenueCat
 1. Create a RevenueCat account
@@ -86,7 +86,7 @@ KwizKid/
 │   ├── QuizView.swift          # Quiz interface
 │   └── ResultsView.swift       # Results screen
 ├── Services/
-│   ├── AWSService.swift        # AWS integration
+│   ├── iCloudAuthService.swift # iCloud authentication
 │   ├── RevenueCatService.swift # Subscription management
 │   └── ChildSafetyService.swift # Safety features
 ├── Theme/
@@ -105,7 +105,7 @@ KwizKid/
 - Progress tracking helps parents monitor learning
 
 ### AI Integration
-- Questions are generated using AWS Bedrock
+- Questions are generated using OpenAI API
 - Content is filtered for child safety
 - Difficulty is adjusted based on age and performance
 - Questions are personalized to each child's interests

@@ -56,7 +56,7 @@
 
 - Never commit API keys to Git
 - Use environment variables in production
-- Consider using AWS Secrets Manager for production apps
+- Consider using iCloud Keychain for production apps
 
 ## 🐛 Troubleshooting
 

@@ -43,6 +43,7 @@ struct UserPreferences: Codable {
     var soundEffects: Bool = true
     var favoriteCategories: [String] = []
     var parentalControls: ParentalControls = ParentalControls()
+    var notifications: NotificationSettings = NotificationSettings()
 }
 
 struct ParentalControls: Codable {
@@ -50,6 +51,14 @@ struct ParentalControls: Codable {
     var dailyTimeLimit: Int = 60 // minutes
     var contentFilter: Bool = true
     var progressTracking: Bool = true
+    var notifications: Bool = true
+}
+
+struct NotificationSettings: Codable {
+    var learningReminders: Bool = true
+    var achievementAlerts: Bool = true
+    var progressUpdates: Bool = false
+    var reminderTime: Date = Calendar.current.date(from: DateComponents(hour: 18, minute: 0)) ?? Date()
 }
 
 // MARK: - Quiz Models
